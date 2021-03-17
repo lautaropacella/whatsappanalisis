@@ -88,9 +88,6 @@ MarkupSafe==1.1.1
 matplotlib==3.3.4
 mccabe==0.6.1
 mistune==0.8.4
-mkl-fft==1.2.0
-mkl-random==1.1.1
-mkl-service==2.3.0
 mock==4.0.3
 more-itertools==8.6.0
 mpmath==1.1.0
@@ -99,8 +96,6 @@ multipledispatch==0.6.0
 murmurhash==1.0.5
 mypy-extensions==0.4.3
 navigator-updater==0.2.1
-nb-conda==2.2.1
-nb-conda-kernels==2.3.1
 nbclient==0.5.1
 nbconvert==6.0.7
 nbformat==5.1.2
