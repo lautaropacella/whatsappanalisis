@@ -184,9 +184,7 @@ sortedcontainers==2.3.0
 soupsieve==2.1
 spacy==3.0.3
 spacy-legacy==3.0.1
-Sphinx==3.4.3
 srsly==2.4.0
-stanza==1.2
 statsmodels==0.12.1
 streamlit==0.78.0
 sympy==1.7.1
