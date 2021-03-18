@@ -1,6 +1,5 @@
-
-
 ##Dependencies
+nltk.data.path.append('./nltk_data/')
 import streamlit as st
 import numpy as np
 import pandas as pd
