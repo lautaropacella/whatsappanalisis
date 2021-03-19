@@ -36,7 +36,7 @@ with st.beta_expander("¿Cómo Funciona?", expanded = False):
     st.write("""
     Para comenzar, necesitas tener el archivo de tu conversación que brinda WhatsApp.\n
     Ingresá en la conversación que te gustaría analizar ->  "⁝"  -> "Más" -> "Exportar Chat"  -> "Sin archivos" -> esperar a que la aplicación produzca el archivo de la conversación.\n
-    Por último, subir el archivo y listo! vas a tener los datos de tu chat."
+    Por último, subir el archivo ¡y listo! vas a tener los datos de tu chat.
     """)
 
 upload_file = st.file_uploader("WhatsApp Chat", accept_multiple_files = False, type = 'txt')
@@ -324,11 +324,3 @@ if upload_file:
                     emoji_author.update_traces(textposition='inside', textinfo='percent+label')
                     emoji_author.write_image(str(i)+'emoji.png')    
                     st.plotly_chart(emoji_author)
-
-
-
-
-
-
-        
-        
