@@ -29,18 +29,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 ##App
-st.set_page_config(page_title='Análisis WhatsApp', layout='wide')
-st.title('Análisis Automático de Conversaciones de WhatsApp')
-st.write('Creado por Lautaro Pacella')
-with st.beta_expander("¿Cómo Funciona?", expanded = False):
-    st.write("""
-    Para comenzar, necesitas tener el archivo de tu conversación que brinda WhatsApp.\n
-    Ingresá en la conversación que te gustaría analizar ->  "⁝"  -> "Más" -> "Exportar Chat"  -> "Sin archivos" -> esperar a que la aplicación produzca el archivo de la conversación.\n
-    Por último, subir el archivo ¡y listo! vas a tener los datos de tu chat.
-    """)
-
-upload_file = st.file_uploader("WhatsApp Chat", accept_multiple_files = False, type = 'txt')
-
 if upload_file:
     with st.spinner('Analizando Conversación'):
 
@@ -76,7 +64,7 @@ if upload_file:
                     emoji_list.append(word)
             return emoji_list
 
-            ##Building the DF
+        ##Building the DF
         df = pd.DataFrame({'Date': dates, 'Time': times, 'Author': authors, 'Content': messages})
         df.Date = pd.to_datetime(df.Date, errors='coerce')
         df.Time = df.Time + ':00'
@@ -120,7 +108,6 @@ if upload_file:
                 if cs:
                     vocab.append(cs)
            ## Remove stopwords
-            stop_words = set(stopwords.words('spanish'))
             vocab = [w for w in vocab if w not in stop_words and w.isalpha()
                         and len(w)>3]
             words_re = re.compile("|".join(lista_palabras))
@@ -136,7 +123,7 @@ if upload_file:
         wordcloud = WordCloud(background_color="black",stopwords=stop_words,
                               width = 1200, height = 500,
                              contour_color='black').generate(" ".join(wc['Content']))
-        wc_plot = plt.figure(facecolor='black', figsize=(12,5), dpi = 3000)
+        wc_plot = plt.figure(facecolor='black', figsize=(12,5), dpi = 500)
         plt.imshow(wordcloud, interpolation='bilinear')
         plt.title('Nube de las 200 Palabras más Utilizadas')
         plt.axis("off")
@@ -203,27 +190,18 @@ if upload_file:
                                       5:'Sábado', 6:'Domingo'},
                              index={0: '00:00', 1:'02:00', 2:'04:00', 3:'06:00',4:'08:00',5:'10:00',
                                     6:'12:00', 7:'14:00', 8:'16:00', 9:'18:00', 10:'20:00', 11:'22:00', 12:'24:00'})
-        calendar_plot,calendar = plt.subplots(figsize=(6,3), dpi=100)
-        calendar = sns.heatmap(hm, cmap="YlOrBr",linewidths=.5)
-        cbar= calendar.collections[0].colorbar
-        cbar.set_ticks([hm.to_numpy().max()/30 * 2, hm.to_numpy().max()/30 * 28])
-        cbar.set_ticklabels(['Menos Mensajes', 'Mas Mensajes'])
-        calendar.set_xlabel('')
-        calendar.set_yticklabels(hm.index,rotation=0)
-        calendar.set_title('Cantidad de Mensajes por Rango de 2 Horas y Días de la Semana')
-
         hm.fillna(0, inplace=True)
         def df_to_plotly(df):
             return {'z': df.values.tolist(),
                     'x': df.columns.tolist(),
                     'y': df.index.tolist()}
 
-        calendar1 = go.Figure(data=go.Heatmap(df_to_plotly(hm), colorscale ="Mint", colorbar=dict(
+        calendar = go.Figure(data=go.Heatmap(df_to_plotly(hm), colorscale ="Mint", colorbar=dict(
                 tickvals=[hm.to_numpy().max()/30 * 2, hm.to_numpy().max()/30 * 28],
                 ticktext=["Menos Mensajes", "Más Mensajes"],
                 ticks="outside"
             )))
-        calendar1.update_layout(title = 'Promedio de mensajes por días de la semana en rangos de 2 hs',
+        calendar.update_layout(title = 'Promedio de mensajes por días de la semana en rangos de 2 hs',
                                title_xanchor= "left")
         
         ##Msgs per Author
@@ -293,7 +271,7 @@ if upload_file:
                 st.plotly_chart(hours,use_container_width=True)
             with col4:
                 st.plotly_chart(days_week,use_container_width=True)
-            st.plotly_chart(calendar1, use_container_width=True)
+            st.plotly_chart(calendar, use_container_width=True)
             
         with st.beta_expander('Por Palabras'):
             st.write(f'''La longitud promedio de mensajes en esta conversación fue {float(lenght.mean()):.2f}''')
