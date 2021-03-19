@@ -310,6 +310,5 @@ if upload_file:
                     emoji_dict = sorted(emoji_dict.items(), key=lambda x: x[1], reverse=True)
                     author_emoji_df = pd.DataFrame(emoji_dict[0:10], columns=['emoji', 'count'])
                     emoji_author = px.pie(author_emoji_df, values='count', names='emoji', title = 'Top 10 Emoji más Usados por ' + i, color_discrete_sequence=px.colors.qualitative.Antique)
-                    emoji_author.update_traces(textposition='inside', textinfo='percent+label')
-                    emoji_author.write_image(str(i)+'emoji.png')    
+                    emoji_author.update_traces(textposition='inside', textinfo='percent+label')   
                     st.plotly_chart(emoji_author)
