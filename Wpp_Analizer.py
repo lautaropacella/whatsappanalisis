@@ -1,5 +1,4 @@
 ##Dependencies
-nltk.data.path.append('./nltk_data/')
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -7,6 +6,8 @@ from os import path
 from PIL import Image
 import datetime
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
+import nltk
+nltk.data.path.append('./nltk_data/')
 from nltk.corpus import stopwords
 from nltk import word_tokenize
 import string
