@@ -285,7 +285,7 @@ if upload_file:
             st.plotly_chart(calendar, use_container_width=True)
             
         with st.beta_expander('Por Palabras'):
-            st.write(f'''La longitud promedio de mensajes en esta conversación fue {float(lenght.mean()):.2f}''')
+            st.write(f'''El promedio de palabras por mensaje en esta conversación fue de {float(lenght.mean()):.2f}''')
             for i in range(1, len(lenght_author.columns)):
                 st.write(f'''Promedio de cantidad de palabras utilizadas por mensaje de {lenght_author.columns[i]} es {float(lenght_author.iloc[0:,i].mean()):.2f}''')
             st.plotly_chart(lenght_plot, use_container_width=True)
