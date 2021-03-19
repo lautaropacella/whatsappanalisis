@@ -40,7 +40,7 @@ with st.beta_expander("¿Cómo Funciona?", expanded = False):
     """)
 
 upload_file = st.file_uploader("WhatsApp Chat", accept_multiple_files = False, type = 'txt')
-st.markdown('**EL CONTENIDO DE LA CONVERSACIÓN NO ES ACCESIBLE NI SERÁ GUARDADO**.')
+st.markdown('**El contenido de su conversación no será accesible para nadie ni será guardado.**.')
 if upload_file:
     with st.spinner('Analizando Conversación'):
 
