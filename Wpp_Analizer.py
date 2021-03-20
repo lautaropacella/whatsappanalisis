@@ -50,7 +50,7 @@ if upload_file:
             try:
                 date = datetime.strptime(text, '%d/%m/%y')
             except:
-                date = ''
+                date = datetime.strptime(text, '%d/%m/%Y')
             return date
         dates = []
         times = []
